@@ -1,0 +1,80 @@
+<!-- <!doctype html>
+<html>
+  <head>
+    <title>Student CIE</title>
+  </head>
+  <body>
+    <h2>Enter Student Details</h2>
+    <form method="POST">
+      {% csrf_token %} USN:<br />
+      <input type="text" name="usn" /><br />
+      Name:<br />
+      <input type="text" name="name" /><br />
+      Subject Code:<br />
+      <input type="text" name="subject_code" /><br />
+      CIE Marks:<br />
+      <input type="number" name="cie_marks" /><br /><br />
+      <button type="submit">Submit</button>
+    </form>
+    <hr />
+    <h3>Students with CIE Marks &lt; 20</h3>
+    <table border="1">
+      <tr>
+        <th>USN</th>
+        <th>Name</th>
+        <th>Subject</th>
+        <th>Marks</th>
+      </tr>
+      {% for s in students %}
+      <tr>
+        <td>{{ s.usn }}</td>
+        <td>{{ s.name }}</td>
+        <td>{{ s.subject_code }}</td>
+        <td>{{ s.cie_marks }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html> -->
+
+<DOCTYPE html>
+<html>
+<head>
+    <title>Student CIE</title>
+</head>
+<body>
+
+    <h2> enter student details </h2>
+    <form method ="POST">
+        {% csrf_token %}
+        usn : <input type="text" name ="usn">
+        <br>
+        name : <input type="text" name ="name">
+        <br>
+        ciemarks: <input type="number" name ="cie_marks">
+        <br>
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+    <h3 > studnets with less cie</h3>
+    <table border="1">
+        <tr>
+            <th>usn</th>
+            <th>name</th>
+            <th>ciemarks</th>
+        </tr>
+        {% for s in students %}
+        <tr>
+            <td>{{s.usn}}</td>
+            <td>{{s.name}}</td>
+            <td>{{s.cie_marks}}</td>
+        </tr>
+        {% endfor %}
+
+
+
+    </table>
+
+</html>

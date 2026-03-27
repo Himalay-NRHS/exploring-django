@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Biodata Form</title>
+</head>
+<body>
+ <h2>Enter Your Biodata</h2>
+ <form method="POST">
+ {% csrf_token %}
+ {{ form.as_p }}
+ <button type="submit">Submit</button>
+ </form>
+</body>
+</html>
