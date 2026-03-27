@@ -37,31 +37,28 @@ $(document).ready(function(){
     $("#form").submit(function(e){
         e.preventDefault();
 
-        $.ajax({
-            url: "/submit/",
-            type: "POST",
-            data: {
-                name: $("#name").val(),
-                feedback: $("#feedback").val(),
-                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val()
-            },
-            success: function(res){
+        var name = $("#name").val();
+        var feedback = $("#feedback").val();
+        var csrf = $("input[name=csrfmiddlewaretoken]").val();
 
-                let count = $("#list").children().length;
+        $.post("/submit/", {
+            name: name,
+            feedback: feedback,
+            csrfmiddlewaretoken: csrf
+        }, function(res){
 
-                let div = `
-                    <div class="${count % 2 == 0 ? 'even' : 'odd'}">
-                        <b>${res.name}</b>: ${res.feedback}
-                    </div>
-                `;
+            var count = $("#list").children().length;
+            var cls = (count % 2 == 0) ? "even" : "odd";
 
-                $("#list").append(div);
+            $("#list").append(
+                "<div class='" + cls + "'><b>" + res.name + "</b>: " + res.feedback + "</div>"
+            );
 
-                $("#list").children().last().hide().fadeIn();
+            $("#list").children().last().hide().fadeIn();
 
-                $("#form")[0].reset();
-            }
+            $("#form")[0].reset();
         });
+
     });
 
 });
