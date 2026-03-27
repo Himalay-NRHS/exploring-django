@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "cie",
     "biodata",
+    "xss_safe",
+    "xss_vulnerable",
+    
     
 ]
 

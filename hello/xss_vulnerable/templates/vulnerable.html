@@ -1,0 +1,23 @@
+<DOCTYPE html>
+
+    <html>
+<head>
+    <title>Student CIE</title>
+</head>
+<body> 
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Enter something">
+        <button type="submit">Submit</button>
+
+
+    </form>
+    <h3>Output:</h3>
+   {{ name|safe }}
+</body>
+
+
+
+    </html>
+</DOCTYPE>
