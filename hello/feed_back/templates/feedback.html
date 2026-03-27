@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        .even { background: lightgreen; }
+        .odd { background: lightpink; }
+    </style>
+</head>
+<body>
+
+<h2>Feedback</h2>
+
+<form id="form">
+    {% csrf_token %}
+    <input type="text" id="name" placeholder="Name" required><br>
+    <textarea id="feedback" placeholder="Feedback" required></textarea><br>
+    <button type="submit">Submit</button>
+</form>
+
+<hr>
+
+<div id="list"></div>
+
+<script>
+$(document).ready(function(){
+
+    $("input, textarea").focus(function(){
+        $(this).css("background","yellow");
+    }).blur(function(){
+        $(this).css("background","white");
+    });
+
+    $("#form").submit(function(e){
+        e.preventDefault();
+
+        $.ajax({
+            url: "/submit/",
+            type: "POST",
+            data: {
+                name: $("#name").val(),
+                feedback: $("#feedback").val(),
+                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val()
+            },
+            success: function(res){
+
+                let count = $("#list").children().length;
+
+                let div = `
+                    <div class="${count % 2 == 0 ? 'even' : 'odd'}">
+                        <b>${res.name}</b>: ${res.feedback}
+                    </div>
+                `;
+
+                $("#list").append(div);
+
+                $("#list").children().last().hide().fadeIn();
+
+                $("#form")[0].reset();
+            }
+        });
+    });
+
+});
+</script>
+
+</body>
+</html>

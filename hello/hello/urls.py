@@ -19,6 +19,6 @@ from django.contrib import admin
 from django.urls import path, include
 urlpatterns = [
  path('admin/', admin.site.urls),
- path('', include('xss_vulnerable.urls')),
+ path('', include('feed_back.urls')),
 ]
 
